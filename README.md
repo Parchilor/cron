@@ -1,2 +1,1 @@
-# cron
-cron by myself. Fixing
+Project model for private use
