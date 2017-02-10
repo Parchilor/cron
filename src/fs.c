@@ -77,10 +77,6 @@ void FS_getlist(FILE_t *file)
 		{
 			FS_add_task(file, strtmp);
 		}
-		else
-		{
-			FS_del_task(file, strtmp);
-		}
 	}
 }
 
