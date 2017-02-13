@@ -1,8 +1,8 @@
 include $(ROOT)/config.$(OSTYPE).mk
 
 OBJS=$(patsubst %.c,%.o,$(wildcard *.c))
-MAIN_OBJS = main.o fs.o
-MODIFY_OBJS = modify.o fs.o
+MAIN_OBJS = main.o fs.o bubble.o
+MODIFY_OBJS = modify.o fs.o bubble.o
 
 all:$(BINARYDIR)/main $(MAIN_OBJS) $(BINARYDIR)/modify $(MODIFY_OBJS)
 $(BINARYDIR)/main:$(MAIN_OBJS)

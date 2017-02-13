@@ -7,55 +7,35 @@
 #include "fs.h"
 #include "cJSON.h"
 
-struct jstime{
-	int y;
-	int mon;
-	int day;
-	int h;
-	int min;
-	int sec;
-	char *comment;
-};
-
-cJSON *JS_encode(struct jstime jst)
-{
-	cJSON *tmpjs = cJSON_CreateObject();
-	cJSON_AddNumberToObject(tmpjs, "year", jst.y);
-	cJSON_AddNumberToObject(tmpjs, "month", jst.mon);
-	cJSON_AddNumberToObject(tmpjs, "day", jst.day);
-	cJSON_AddNumberToObject(tmpjs, "hour", jst.h);
-	cJSON_AddNumberToObject(tmpjs, "minute", jst.min);
-	cJSON_AddNumberToObject(tmpjs, "second", jst.sec);
-	cJSON_AddStringToObject(tmpjs, "comment", jst.comment);
-	return tmpjs;
-}
-
-char *JS_modify(cJSON *root)
-{
-	char *tmp = cJSON_PrintUnformatted(root);
-	tmp[strlen(tmp)] = '\n';
-	return tmp;
-}
-
 int main(argc, argv)
 	int argc;
 	char *argv[];
 {
-	// cron details
-	struct jstime t = {
+	/* cron details
+	CRON_TIME_t t = {
 		.y		= atoi(argv[1]),
 		.mon	= atoi(argv[2]),
 		.day		= atoi(argv[3]),
 		.h		= atoi(argv[4]),
 		.min		= atoi(argv[5]),
 		.sec		= atoi(argv[6]),
-		.comment	= argv[7]
+		.tag		= atoi(argv[7]),
+		.comment	= argv[8]
 	};
-	
+	*/
+									
 	FILE_t file = { .fp = 0, .patch = "files/cmd", .mode = "rb"};
 	FS_open(&file);
 	FS_getlist(&file);
-	FS_add_task(&file, JS_modify(JS_encode(t)));
+	CRON_TIME_t *t = JS_init_jstime(atoi(argv[1]), 
+									atoi(argv[2]), 
+									atoi(argv[3]), 
+									atoi(argv[4]), 
+									atoi(argv[5]), 
+									atoi(argv[6]), 
+									//atoi(argv[7]), 
+									argv[7]);
+	FS_add_task(&file, (char *)JS_modify(JS_encode(t)));
 	FS_rewrite(&file);
 	FS_close(&file);
 	return 0;

@@ -25,7 +25,7 @@ INCLUDE_DIRS	= $(ROOT)/include
 LIBRARY_DIRS	= $(ROOT)/lib
 LIBRARY_NAMES	= cjson crypto readline
 OUTPUTDIR	:= Debug
-EXCEPTDIRS := $(OUTPUTDIR) include files
+EXCEPTDIRS := $(OUTPUTDIR) include files Sai
 
 SUBDIRS := $(shell find . -maxdepth 1 -type d)
 SUBDIRS := $(basename $(patsubst ./%,%,$(SUBDIRS)))
