@@ -1,7 +1,7 @@
 #CROSS_COMPILER = mipsel-openwrt-linux-
 
 CC = $(CROSS_COMPILER)gcc
-CXX = $(CROSS_CONPILER)g++
+CXX = $(CROSS_CONPILER)gcc
 LD = $(CXX)
 AR = $(CROSS_COMPILER)ar
 OBJCOPY = $(CROSS_COMPILER)objcopy
@@ -23,11 +23,12 @@ LDFLAGS	=
 ARFLAGS	=
 INCLUDE_DIRS	= $(ROOT)/include
 LIBRARY_DIRS	= $(ROOT)/lib
-LIBRARY_NAMES	= cjson crypto readline
+LIBRARY_NAMES	= cjson m #crypto
 OUTPUTDIR	:= Debug
 EXCEPTDIRS := $(OUTPUTDIR) include files Sai
 
-SUBDIRS := $(shell find . -maxdepth 1 -type d)
+#SUBDIRS := $(shell find . -maxdepth 1 -type d)
+SUBDIRS := $(ROOT)/lib $(ROOT)/src
 SUBDIRS := $(basename $(patsubst ./%,%,$(SUBDIRS)))
 SUBDIRS := $(filter-out $(EXCEPTDIRS),$(SUBDIRS))
 

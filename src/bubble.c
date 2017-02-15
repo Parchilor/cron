@@ -15,9 +15,9 @@ void Sort_bubble(int* pData,int Count)
 }
 #else
 {
-	int iTemp;
-	for(int i = 0; i<Count;i++)	{
-		for(int j = 0; j < Count-1;j++)	{
+	int iTemp, i, j;
+	for(i = 0; i<Count;i++)	{
+		for(j = 0; j < Count-1;j++)	{
 			if (pData[j]>pData[j+1])	{
 				iTemp = pData[j+1];
 				pData[j+1] = pData[j];
